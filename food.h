@@ -5,6 +5,8 @@
 #include <iostream>
 using namespace std;
 
+//hi
+
 class Nutrition {
     private:
         int calories; // kCal
@@ -25,7 +27,7 @@ class Food: public Nutrition {
     private:
         std::string name;
         std::string category;
-        Json::Value nutrition;
+        int nutrition;
         int expirationDate; // days
         float requiredTemp; // C
         float servings;

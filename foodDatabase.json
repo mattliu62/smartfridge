@@ -1,0 +1,15 @@
+[
+    {
+        "name": "Black Beans",
+        "category": "Legume",
+        "nutrition": {
+            "calories": 30,
+            "protein": 20,
+            "carbs": 5,
+            "fat": 1,
+            "sodium": 0
+        },
+        "expirationDate": 2,
+        "requiredTemp": 12
+    }
+]

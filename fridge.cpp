@@ -7,7 +7,7 @@ using namespace std;
 
 Fridge::Fridge(): name("McFrizzle"), brand("McDonald'"){
     open_close = 0; // 0 = closed
-    temp = 40.0;
+    temp = 50.0;
 }
 Fridge::Fridge(std::string arg_name, std::string arg_brand){
     open_close = 0; // 0 = closed

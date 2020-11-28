@@ -2,6 +2,7 @@
 
 static int foodCounter;
 
+
 Food::Food()
 {
     std::cout << foodCounter++ << " New food added to fridge!" << std::endl;

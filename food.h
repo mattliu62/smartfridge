@@ -27,7 +27,7 @@ class Food: public Nutrition {
         std::string category;
         Json::Value nutrition;
         int expirationDate; // days
-        float requiredTemp;
+        float requiredTemp; // C
         float servings;
 
     public:

@@ -17,7 +17,7 @@ Food::Food(std::string arg_name, std::string arg_category,
     this->nutrition = arg_nutrition;
     this->expirationDate = arg_expirationDate;
     this->requiredTemp = arg_requiredTemp;
-    this->sevings =  arg_servings;
+    this->servings =  arg_servings;
 }
 
 Food::~Food()
@@ -40,7 +40,7 @@ std::string Food::dumpNutrition()
     return "hi";
 }
 
-std::string Food::getExpiration()
+int Food::getExpiration()
 {
     return this->expirationDate;
 }

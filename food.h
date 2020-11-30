@@ -3,29 +3,16 @@
 
 #include <string>
 #include <iostream>
+#include <json/json.h>
+#include "nutrition.h"
 using namespace std;
 
-class Nutrition {
-    private:
-        int calories; // kCal
-        int protein; // g
-        int carbs; // g
-        int fat; // g
-        int sodium; // mg
-    
-    public:
-        virtual int getCalories();
-        virtual int getProtein();
-        virtual int getCarbs();
-        virtual int getFat();
-        virtual int getSodium();
-};
 
-class Food: public Nutrition {
+class Food {
     private:
         std::string name;
         std::string category;
-        Json::Value nutrition;
+        Nutrition nutrition;
         int expirationDate; // days
         float requiredTemp; // C
         float servings;
@@ -40,8 +27,9 @@ class Food: public Nutrition {
         virtual std::string getName();
         virtual std::string getCategory();
         virtual std::string dumpNutrition();
-        virtual std::string getExpiration();
+        virtual int getExpiration();
         virtual float getTemperature();
+        virtual float getServings();
 };
 
 #endif

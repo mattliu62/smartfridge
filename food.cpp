@@ -1,56 +1,31 @@
 #include "food.h"
+#include <string>
+#include <vector>
+#include <iostream>
 
-static int foodCounter;
+Food::Food(std::string arg_name, std::string arg_type, int arg_calories,
+        int arg_shelf_Life, int arg_sugar, int arg_sodium) : name(arg_name), type(arg_type),
+        calories(arg_calories), shelf_Life(arg_shelf_Life), sugar(arg_sugar), sodium(arg_sodium), remainder(100){}
 
-
-Food::Food()
+void Food::printNutrition() 
 {
-    std::cout << foodCounter++ << " New food added to fridge!" << std::endl;
+    std::cout << "Calories: " << this->calories << std::endl;
+    std::cout << "Sugar: " << this->sugar << std::endl;
+    std::cout << "Sodium: " << this->sodium << std::endl;
 }
 
-Food::Food(std::string arg_name, std::string arg_category, 
-           Json::Value arg_nutrition, int arg_expirationDate,
-           float arg_requiredTemp, float arg_servings)
+void Food::getCalories()
 {
-    this->name = arg_name;
-    this->category = arg_category;
-    this->nutrition = arg_nutrition;
-    this->expirationDate = arg_expirationDate;
-    this->requiredTemp = arg_requiredTemp;
-    this->servings =  arg_servings;
+    return this->calories;
 }
 
-Food::~Food()
+int Food::getShelfLife()
 {
-
+    return this->shelf_Life;
+}
+int Food::getRemainder()
+{
+    return this->remainder;
 }
 
-std::string Food::getName()
-{
-    return this->name;
-}
 
-std::string Food::getCategory()
-{
-    return this->category;
-}
-
-std::string Food::dumpNutrition()
-{
-    return "hi";
-}
-
-int Food::getExpiration()
-{
-    return this->expirationDate;
-}
-
-float Food::getTemperature()
-{
-    return this->requiredTemp;
-}
-
-float Food::getServings()
-{
-    return this->servings;
-}

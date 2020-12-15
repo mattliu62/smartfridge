@@ -153,6 +153,23 @@ int Fridge::foodCounter() {
     return (this->foods).size();
 }
 
+void Fridge::eatFood(Food::Food arg_food, int percent)
+{
+    if (percent > 100 || percent <= 0)
+    {
+        std::cout << "It's impossible to eat " << percent << "%" << " of the food." <<std::endl;
+    }
+    else
+    {
+        arg_food.remainder = arg_food.remainder - percent;
+        arg_food.calories = (arg_food.remainder / 100) * arg.food.calories;
+        if (arg_food.remainder <= 0)
+        {
+            this->purgeFood(arg_food);
+        }
+    }
+}
+
 //DUMMY MAIN
 int main(){
     Fridge myFridge;

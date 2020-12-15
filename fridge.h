@@ -1,6 +1,7 @@
 #include <string>
 //#include "food.h"
 #include <vector>
+#include "food.h"
 
 using namespace std;
 
@@ -20,8 +21,9 @@ class Fridge {
 
         //food operations
         int listFood();
-        void addFood(std::string arg_Food); //food object as parameter
-        void purgeFood(std::string arg_Food);
+        void addFood(Food::Food arg_Food); //food object as parameter
+        void purgeFood(Food::Food arg_Food);
+        void eatFood(Food::Food arg_Food, int percent);
         void removeExpired();
 
        // int calorieSum();
@@ -32,7 +34,7 @@ class Fridge {
         std::string name;
         std::string brand;
         bool open_close;
-        std::vector<std::string>foods; //maximum capacity is 20 for now
+        std::vector<Food::Food>foods; //maximum capacity is 20 for now
         int foodCounter();
 
 };

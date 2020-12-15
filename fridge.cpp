@@ -1,14 +1,15 @@
-using namespace std;
 #include <string>
-#include "fridge.h"
 #include <vector>
 #include <iostream>
+#include "fridge.h"
+#include "food.h"
+
+using namespace std;
 
 //REPLACE ALL STRING FOODS WITH OBJECT FOOD
 
-// bernie sanders
 
-Fridge::Fridge(): name("McFrizzle"), brand("McDonald'"){
+Fridge::Fridge(): name("PlayStation 5"), brand("Sony"){
     open_close = 0; // 0 = closed
     temp = 50.0;
 }
@@ -93,7 +94,7 @@ int Fridge::listFood()
         std::cout << "There are " << count << " food items in " << this->name << "." << std::endl;
         for (int i = 0; i < count; i++)
         {
-            std::cout << "-" + (this->foods[i])<< std::endl;
+            std::cout << "-" << (this->foods[i].getName())<< std::endl;
         }
     }
     else
@@ -104,7 +105,7 @@ int Fridge::listFood()
   
 }
 
-void Fridge::addFood(std::string arg_Food)
+void Fridge::addFood(Food arg_Food)
 {
     if (this->open_close == 1)
     {
@@ -123,7 +124,7 @@ void Fridge::purgeFood(std::string arg_Food)
     {
         for(int i = 0; i < count; i++)
         {
-            if ((this->foods[i]) == arg_Food)
+            if ((this->foods[i].getName()) == arg_Food)
             {
                 (this->foods).erase(foods.begin() + i);
             }
@@ -153,32 +154,39 @@ int Fridge::foodCounter() {
     return (this->foods).size();
 }
 
-void Fridge::eatFood(Food::Food arg_food, int percent)
+void Fridge::eatFood(std::string arg_Food, int percent)
 {
-    if (percent > 100 || percent <= 0)
+    int count = this->foodCounter();
+    if (this->open_close == 1)
     {
-        std::cout << "It's impossible to eat " << percent << "%" << " of the food." <<std::endl;
+        for(int i = 0; i < count; i++)
+        {
+            std::cout << arg_Food <<std::endl;
+            std::cout<< this->foods[i].getName()<<std::endl;
+            if ((this->foods[i].getName()) == arg_Food)
+            {
+                    if (percent > 100 || percent <= 0)
+                    {
+                        std::cout << "It's impossible to eat " << percent << "%" << " of the food." <<std::endl;
+                    }
+                    else
+                    {
+                        this->foods[i].remainder = this->foods[i].remainder - percent;
+                        this->foods[i].calories = (this->foods[i].remainder / 100) * this->foods[i].calories;
+                        if (this->foods[i].remainder <= 0)
+                        {
+                            this->purgeFood(arg_Food);
+                        }
+                    }
+            }
+            else
+            {
+                std::cout << "That food item was not found in " + this->name + "!" << std::endl;
+            }
+        }
     }
     else
     {
-        arg_food.remainder = arg_food.remainder - percent;
-        arg_food.calories = (arg_food.remainder / 100) * arg.food.calories;
-        if (arg_food.remainder <= 0)
-        {
-            this->purgeFood(arg_food);
-        }
+        std::cout << "The fridge is closed!" << std::endl;
     }
-}
-
-//DUMMY MAIN
-int main(){
-    Fridge myFridge;
-    myFridge.openFridge();
-    myFridge.addFood("Chocolate Cookies");
-    myFridge.listFood();
-    myFridge.checkStatus();
-    myFridge.purgeFood("Chocolate Cookies");
-    myFridge.listFood();
-    myFridge.closeFridge();
-    myFridge.checkStatus();
-}
+};

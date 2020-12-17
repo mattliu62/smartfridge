@@ -23,9 +23,11 @@ class Fridge {
         //food operations
         int listFood();
         void addFood(Food arg_Food); //food object as parameter
-        void purgeFood(std::string arg_Food);
-        void eatFood(std::string arg_Food, int percent);
+        void purgeFood(Food arg_Food);
+        void eatFood(Food arg_Food, int percent);
         void removeExpired();
+        void addrecipe();
+        void viewRecipes();
 
        // int calorieSum();
 
@@ -35,6 +37,7 @@ class Fridge {
         std::string name;
         std::string brand;
         bool open_close;
+        std::vector<std::vector<Food>>recipes;
         std::vector<Food>foods; //maximum capacity is 20 for now
         int foodCounter();
 

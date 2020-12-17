@@ -109,6 +109,7 @@ void Fridge::addFood(Food arg_Food)
 {
     if (this->open_close == 1)
     {
+        std::cout << arg_Food.getName() << " has been stocked!" <<std::endl;
         (this->foods).push_back(arg_Food);
     }
     else
@@ -117,16 +118,18 @@ void Fridge::addFood(Food arg_Food)
     }
 }
 
-void Fridge::purgeFood(std::string arg_Food)
+void Fridge::purgeFood(Food arg_Food)
 {
     int count = this->foodCounter();
     if (this->open_close == 1)
     {
         for(int i = 0; i < count; i++)
         {
-            if ((this->foods[i].getName()) == arg_Food)
+            if (this->foods[i].getName() == arg_Food.getName())
             {
+                std::cout << this->foods[i].getName() << " has been tossed!" <<std::endl;
                 (this->foods).erase(foods.begin() + i);
+                break;
             }
             else
             {
@@ -153,17 +156,52 @@ void Fridge::purgeFood(std::string arg_Food)
 int Fridge::foodCounter() { 
     return (this->foods).size();
 }
+void Fridge::addrecipe(){
+    std::vector<Food>input;
+    std::string food;
+    int x;
+    while(true){
+        cout<< "Type a food: " <<endl;
+        cin >> food;
+        int count = this->foodCounter();
+        for (int i = 0; i < count; i++)
+        {
+            if (food == this->foods[i].getName())
+            input.push_back(this->foods[i]);
+            cout<< "Done with ingredients? (1 if yes 0 if no)" <<std::endl;
+            cin >> x;
+            //the result will always be the last element in vector
+            if(x){
+                cout<< "What does this make?" << endl;
+                cin >> food;
+                Food recipe(food, "thing", 99, 99, 99, 99);
+                input.push_back(recipe);
+                cout << "Finished!" << endl;
+                break;
+            }
 
-void Fridge::eatFood(std::string arg_Food, int percent)
+        }
+            
+    }
+    (this->recipes).push_back(input);
+}
+
+void Fridge::viewRecipes(){
+    std::vector<int>::size_type sz = this->recipes.size();
+    std::cout << (this->recipes).size() << std::endl;
+    for(int i = 0; i < sz; i++){
+        std::cout << (this->recipes[i][this->recipes[i].size()-1]).getName() << std::endl;
+    }
+}
+
+void Fridge::eatFood(Food arg_Food, int percent)
 {
     int count = this->foodCounter();
     if (this->open_close == 1)
     {
         for(int i = 0; i < count; i++)
         {
-            std::cout << arg_Food <<std::endl;
-            std::cout<< this->foods[i].getName()<<std::endl;
-            if ((this->foods[i].getName()) == arg_Food)
+            if (this->foods[i].getName() == arg_Food.getName())
             {
                     if (percent > 100 || percent <= 0)
                     {
@@ -176,7 +214,14 @@ void Fridge::eatFood(std::string arg_Food, int percent)
                         if (this->foods[i].remainder <= 0)
                         {
                             this->purgeFood(arg_Food);
+                            std::cout << "This item has been completely eaten." <<std::endl;
                         }
+                        else
+                        {
+                            std::cout << "There is " << foods[i].remainder << "%" << " of " << foods[i].getName() << " remaining." <<std::endl;
+                            break;
+                        }
+                        
                     }
             }
             else

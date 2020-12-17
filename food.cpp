@@ -11,7 +11,7 @@ Food::Food(std::string arg_name, std::string arg_type, int arg_calories,
 void Food::printNutrition() 
 {
     std::cout << "---------------------------------------" << std::endl;
-    std::cout << "Nutrition Values" << std::endl;
+    std::cout << "Nutrition Values for " << this->name << std::endl;
     std::cout << "---------------------------------------" << std::endl;
     std::cout << "Calories: " << this->calories << std::endl;
     std::cout << "Sugar: " << this->sugar << "g" << std::endl;

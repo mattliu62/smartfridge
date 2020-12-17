@@ -143,16 +143,6 @@ void Fridge::purgeFood(Food arg_Food)
     }
 }
 
-/*int Fridge::calorieSum() {
-    int calories = 0;
-    int count = foodCounter();
-    for (int i = 0; i < count; i++)
-    {
-        calories += (foods[i]->getCalories());
-    }
-    return calories;
-}*/
-
 int Fridge::foodCounter() { 
     return (this->foods).size();
 }
@@ -192,6 +182,49 @@ void Fridge::viewRecipes(){
     for(int i = 0; i < sz; i++){
         std::cout << (this->recipes[i][this->recipes[i].size()-1]).getName() << std::endl;
     }
+}
+void Fridge::whatCanIMake(){
+    cout<< "Here is what you have:" << listFood() << endl;
+    std::vector<std::vector<Food>> possible;
+    int counter = 0;
+    int input;
+    cout << "How many ingredients do you plan on using?" <<endl;
+    cin >> input;
+    std::vector<int>::size_type sz = this->recipes.size();
+    for(int i = 0; i < sz; i++){
+        if(this->recipes[i].size()-1 == input){
+            possible.push_back(this->recipes[i]);
+        }
+    }
+    while(input > 0){
+        std::string yes;
+        std::vector<int>::size_type size = possible.size();
+        if(size==0){
+            cout << "No known recipes" << endl;
+            break;
+        }
+        cout << "Enter Ingredient" << endl;
+        input--;
+        cin >> yes;
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < possible[i].size()-1; j++){
+                if(possible[i][j].getName()==yes){
+                    break;
+                }
+                if(j==possible[i].size()-2){
+                    possible.erase(possible.begin() + i);
+                }
+            }
+            
+        }
+
+        
+    }
+    cout << "You can make:" << endl;
+    for(int k = 0; k < possible.size(); k++){
+        cout<< possible[k][possible.size()].getName() << endl;
+    }
+
 }
 
 void Fridge::eatFood(Food arg_Food, int percent)

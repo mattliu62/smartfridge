@@ -28,6 +28,7 @@ class Fridge {
         void removeExpired();
         void addrecipe();
         void viewRecipes();
+        void whatCanIMake();
 
        // int calorieSum();
 
